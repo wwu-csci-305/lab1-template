@@ -1,0 +1,35 @@
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    // Apply the application plugin to add support for building an application
+    id 'application'
+}
+
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation(platform('org.junit:junit-bom:5.9.0'))
+	testImplementation('org.junit.jupiter:junit-jupiter')
+
+    // add solution jar
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+// Define the main class for the application
+application {
+    mainClass = 'HelloWord.App' 
+}
+
+tasks.named('test') {
+    useJUnitPlatform() 
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
